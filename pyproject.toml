@@ -1,0 +1,37 @@
+[project]
+name = "cloud-ops"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Bhavesh", email = "bhaav.minor@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "jinja2>=3.1.4",
+    "langchain>=0.3.0",
+    "langchain-community>=0.3.0",
+    "langchain-core>=0.3.0",
+    "langchain-google-genai>=4.4.3",
+    "langchain-openai>=0.3.0",
+    "langchain-pinecone>=0.2.0",
+    "langchain-text-splitters>=0.3.0",
+    "langgraph>=0.2.0",
+    "langgraph-checkpoint-sqlite>=2.0.0",
+    "pinecone>=5.0.0",
+    "pydantic>=2.8.0",
+    "pypdf>=5.0.0",
+    "python-docx>=1.1.2",
+    "python-dotenv>=1.0.1",
+    "python-multipart>=0.0.9",
+    "tavily-python>=0.5.0",
+    "uvicorn[standard]>=0.30.0",
+]
+
+[project.scripts]
+cloud-ops = "cloud_ops:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"

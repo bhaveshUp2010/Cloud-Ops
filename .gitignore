@@ -1,0 +1,101 @@
+
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+build/
+dist/
+
+# ==============================
+# Virtual Environments
+# ==============================
+.venv/
+venv/
+env/
+ENV/
+
+# ==============================
+# UV
+# ==============================
+.uv/
+
+# ==============================
+# Environment Variables / Secrets
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Jupyter Notebook
+# ==============================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==============================
+# IDE / Editors
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+
+# ==============================
+# AI / ML Model Files
+# ==============================
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.gguf/
+models/
+checkpoints/
+
+# ==============================
+# Data and Vector Databases
+# ==============================
+data/raw/
+data/processed/
+chroma_db/
+vectorstore/
+faiss_index/
+*.sqlite
+*.db
+
+# ==============================
+# OS Generated Files
+# ==============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Testing / Coverage
+# ==============================
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# ==============================
+# Temporary Files
+# ==============================
+*.tmp
+*.bak
+*.orig
+.cache/
+tmp/
