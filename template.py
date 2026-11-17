@@ -3,8 +3,8 @@ from pathlib import Path
 folders = [
     "src",
     "documents",
-    "templates",
-    "static",
+    "src/templates",
+    "src/static",
     "uploads",
     "data"
 ]
@@ -14,9 +14,7 @@ files = [
     "main.py",
     "data_ingestion.py",
     "Dockerfile",
-    "requirements.py",
-    ".env",
-
+    "src/app.py",
 
     "src/__init__.py",
     "src/config.py",
@@ -26,9 +24,9 @@ files = [
     "src/self_rag.py",
     "src/vectorstore.py",
 
-    "templates/index.html",
-    "templates/styles.css",
-    "templates/app.js",
+    "src/templates/index.html",
+    "src/static/styles.css",
+    "src/static/app.js",
 ]
 
 def main():

@@ -8,16 +8,16 @@ from docx import Document as docxDocument
 from src.config import get_settings
 from src.vectorstore import get_vector_store
 
-SUPPORTED_FILES = {".txt", ".pdf", ".md", ".docx"}
+SUPPORTED = {".txt", ".pdf", ".md", ".docx"}
 
 
 def load_docx(path: Path) -> List[Document]:
-    docs = docxDocument(path)
-    text = "\n".join(p for p in docs.paragraphs if p.text.strip())
-    return [Document(page_content=text, metadata = {"source": str(path), "title": path.name})]
+    document = docxDocument(path)
+    text = "\n".join(p.text for p in document.paragraphs if p.text.strip())
+    return [Document(page_content=text, metadata={"source": str(path), "title": path.name})]
 
     
-def load_file(path: Path) -> Path:
+def load_file(path: Path) -> List[Document]:
     extension = path.suffix.lower()
 
     if extension == ".pdf":
@@ -62,10 +62,12 @@ def ingest_file(path: Path) -> int:
     )
 
     chunks = splitter.split_documents(docs)
+    if not chunks:
+        return 0
 
     for i, chunk in enumerate(chunks):
         chunk.metadata["chunk index"] = i
-        chunk.metadata["knwledge_base"] = s.PINECONE_NAMESPACE
+        chunk.metadata["knowledge_base"] = s.PINECONE_NAMESPACE
 
     ids = [generate_stable_ids(path, chunk, i) for i, chunk in enumerate(chunks)]
 
@@ -75,14 +77,18 @@ def ingest_file(path: Path) -> int:
 
 
 def ingest_dir(dir: Path) -> int:
-
     total = 0
 
     if not dir.exists():
-        raise 0
+        raise FileNotFoundError(f"Document directory does not exist: {dir}")
+    if not dir.is_dir():
+        raise NotADirectoryError(f"Document path is not a directory: {dir}")
 
     for path in sorted(dir.iterdir()):
-        if path.is_file() and path.suffix.lower() in SUPPORTED_FILES:
+        if path.is_file() and path.suffix.lower() in SUPPORTED:
             total += ingest_file(path)
 
     return total
+
+def namespace() -> str:
+    return get_settings().PINECONE_NAMESPACE

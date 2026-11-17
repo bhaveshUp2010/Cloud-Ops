@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fb">
+  <title>CloudOps Sentinel | Operations assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="/" aria-label="CloudOps Sentinel home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5 19 6v5.3c0 4.3-2.8 7.4-7 9.2-4.2-1.8-7-4.9-7-9.2V6l7-2.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="brand-copy"><strong>CloudOps</strong><span>Sentinel</span></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="primary-nav">
+        <a class="nav-link active" href="#assistant" aria-label="Assistant" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 6.5h14v10H9l-4 3v-13Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 10h7M8.5 13h4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Assistant</span>
+        </a>
+        <a class="nav-link" href="#knowledge" aria-label="Knowledge base">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5.5 5.5A2.5 2.5 0 0 1 8 3h11v16H8a2.5 2.5 0 0 0-2.5 2v-15.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 18.5A2.5 2.5 0 0 1 8 16h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Knowledge base</span>
+        </a>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-note">
+        <span class="status-dot" aria-hidden="true"></span>
+        <div><strong>Assistant ready</strong><span>Responses use your operations knowledge</span></div>
+      </div>
+      <div class="sidebar-footer">CloudOps Sentinel <span>·</span> v2.0</div>
+    </aside>
+
+    <main class="main-content" id="assistant">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong>Assistant</strong></div>
+        <div class="topbar-status"><span class="status-dot" aria-hidden="true"></span> Systems operational</div>
+      </header>
+      <section class="conversation" aria-label="Assistant conversation">
+        <div class="conversation-inner" id="message-list" aria-live="polite">
+          <section class="welcome" id="welcome">
+            <div class="eyebrow"><span class="eyebrow-line"></span> CLOUD OPERATIONS</div>
+            <h1>How can I help you today?</h1>
+            <p class="welcome-copy">Get clear, grounded guidance for incidents, infrastructure, and operational runbooks.</p>
+            <div class="suggestions" aria-label="Suggested questions">
+              <button class="suggestion" type="button" data-prompt="How should I investigate elevated API latency?">
+                <span class="suggestion-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9 12l3.5 3.5L20 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 7H20v4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span><strong>Investigate an incident</strong><small>Work through elevated API latency</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="suggestion" type="button" data-prompt="What should I check when a deployment starts failing health checks?">
+                <span class="suggestion-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5v4M12 16.5v4M3.5 12h4M16.5 12h4M6 6l2.8 2.8m6.4 6.4L18 18m0-12-2.8 2.8m-6.4 6.4L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                <span><strong>Review a deployment</strong><small>Diagnose failing health checks</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="suggestion" type="button" data-prompt="Summarize the safest steps for rolling back a production release.">
+                <span class="suggestion-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 7H3.5v-3.5M4 7a8 8 0 1 1-1 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8v4l2.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span><strong>Plan a rollback</strong><small>Follow a safe release recovery path</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+      <footer class="composer-area">
+        <div class="composer-wrap">
+          <div class="upload-status" id="upload-status" role="status" aria-live="polite"></div>
+          <form class="composer" id="chat-form">
+            <label class="sr-only" for="question">Ask CloudOps Sentinel</label>
+            <textarea id="question" name="question" rows="1" maxlength="252" placeholder="Ask about an incident, service, or runbook…" required></textarea>
+            <div class="composer-actions">
+              <div class="composer-tools">
+                <input class="sr-only" type="file" id="file-input" accept=".pdf,.txt,.md,.docx">
+                <button class="upload-button" id="upload-trigger" type="button" aria-label="Add a document to the knowledge base">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V4m0 0L8 8m4-4 4 4M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>Add reference</span>
+                </button>
+                <span class="file-hint" id="knowledge">PDF, TXT, MD or DOCX</span>
+              </div>
+              <button class="send-button" id="send-button" type="submit" aria-label="Send message"><span>Send</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </form>
+          <p class="disclaimer">AI-generated guidance can be incomplete. Verify critical actions against your procedures.</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

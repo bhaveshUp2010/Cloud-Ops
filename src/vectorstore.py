@@ -15,7 +15,8 @@ def get_embeddings():
     return GoogleGenerativeAIEmbeddings(
         model=s.GEMINI_EMBEDDING_MODEL,
         api_key=s.GEMINI_API_KEY,
-        output_dimensionality=s.EMBEDDING_DIM
+        output_dimensionality=s.EMBEDDING_DIM,
+        request_options={"timeout": s.GEMINI_TIMEOUT_SECONDS * 1000},
     )
 
 

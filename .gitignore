@@ -68,10 +68,15 @@ checkpoints/
 # ==============================
 data/raw/
 data/processed/
+uploads/
 chroma_db/
 vectorstore/
 faiss_index/
 *.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db-shm
+*.db-wal
 *.db
 
 # ==============================

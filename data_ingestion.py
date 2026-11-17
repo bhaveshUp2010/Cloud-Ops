@@ -1,6 +1,6 @@
 from pathlib import Path
 from src.vectorstore import ensure_pinecone_index
-from src.ingestion import ingest_dir, SUPPORTED_FILES
+from src.ingestion import ingest_dir, SUPPORTED
 from src.config import get_settings
 
 
@@ -30,7 +30,7 @@ def main():
 
     files = [
         p for p in sorted(document_dir.iterdir())
-        if p.is_file() and p.suffix.lower() in SUPPORTED_FILES
+        if p.is_file() and p.suffix.lower() in SUPPORTED
     ] if document_dir.exists() else []
 
     if not files:
