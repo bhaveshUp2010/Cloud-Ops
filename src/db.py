@@ -38,7 +38,11 @@ def save_audit(question: str, result: dict) -> None:
                 (
                     datetime.now(timezone.utc).isoformat(),
                     question,
-                    result.get("answer", ""),
+                    (
+                        result.get("answer", "")
+                        if isinstance(result.get("answer", ""), str)
+                        else json.dumps(result.get("answer"), ensure_ascii=False)
+                    ),
                     result.get("route", ""),
                     int(bool(result.get("used_web_search"))),
                     result.get("support_status", ""),

@@ -158,6 +158,39 @@ def _memory_text(state: RagState, limit: int = 5) -> str:
     )
 
 
+def _extract_text(content) -> str:
+    """
+    Convert LangChain/Gemini message content into a plain string.
+
+    Gemini may return either a normal string or a list of content
+    blocks such as [{"type": "text", "text": "..."}].
+    """
+    if content is None:
+        return ""
+
+    if isinstance(content, str):
+        return content
+
+    if isinstance(content, dict):
+        text_value = content.get("text")
+        return text_value if isinstance(text_value, str) else ""
+
+    if isinstance(content, list):
+        parts = []
+
+        for block in content:
+            if isinstance(block, str):
+                parts.append(block)
+            elif isinstance(block, dict):
+                text_value = block.get("text")
+                if isinstance(text_value, str):
+                    parts.append(text_value)
+
+        return "\\n".join(part for part in parts if part).strip()
+
+    return str(content)
+
+
 # ============================================================
 # NODE 1: CONTEXTUALIZE QUESTION
 # ============================================================
@@ -323,11 +356,12 @@ def generate_direct(state: RagState):
         ("human", "{question}"),
     ])
 
-    ans = _llm().invoke(
+    response = _llm().invoke(
         prompt.format_messages(
             question=state["question"]
         )
-    ).content
+    )
+    ans = _extract_text(response.content)
 
     return {
         "answer": ans,
@@ -419,9 +453,6 @@ def grade_relevance(state: RagState):
         ]
     else:
         relevant_docs = []
-
-        if decision.is_relevant:
-            relevant_docs.append(doc)
 
     mode = state.get("source_mode", "internal")
 
@@ -652,12 +683,13 @@ def generate_from_context(state: RagState):
         ),
     ])
 
-    ans = _llm().invoke(
+    response = _llm().invoke(
         prompt.format_messages(
             question=state["question"],
             context=context
         )
-    ).content
+    )
+    ans = _extract_text(response.content)
 
     return {
         "answer": ans,
@@ -753,13 +785,14 @@ def revise_answer(state: RagState):
         ),
     ])
 
-    ans = _llm().invoke(
+    response = _llm().invoke(
         prompt.format_messages(
             question=state["question"],
             answer=state.get("answer", ""),
             context=state.get("context", "")
         )
-    ).content
+    )
+    ans = _extract_text(response.content)
 
     return {
         "answer": ans,

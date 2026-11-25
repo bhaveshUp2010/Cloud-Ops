@@ -35,7 +35,7 @@ def load_file(path: Path) -> List[Document]:
     for d in docs:
         d.metadata.setdefault("source", str(path))
         d.metadata.setdefault("title", path.name)
-        d.metadata["document_name"] = path.name
+        d.metadata["document_name"] = path.name 
 
     return docs
 
